@@ -11,7 +11,7 @@ export const AppBar = (props) => {
         <LogoImg src='images/logo.png' />}
       {position === 'footer' && 
       <>
-        <Text>Made with 💚 in Melbourne</Text>
+        <Text>Made with <span role='img' aria-label='heart'>💚</span> in Melbourne</Text>
         <Text>&copy; 2016 Broccoli &amp; Co. All Rights Reserved</Text>
       </>}
     </CustomAppBar>
