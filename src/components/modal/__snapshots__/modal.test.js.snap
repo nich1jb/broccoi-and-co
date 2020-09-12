@@ -14,7 +14,7 @@ exports[`Modal matches snapshot 1`] = `
     >
       <InputField
         name="name"
-        placeholder="First Name"
+        placeholder="Full Name"
         type="text"
       />
       <InputField
@@ -30,7 +30,7 @@ exports[`Modal matches snapshot 1`] = `
       <InputSubmit
         disabled={false}
         type="submit"
-        value="Submit"
+        value="Send"
       />
     </form>
   </ModalContainer>

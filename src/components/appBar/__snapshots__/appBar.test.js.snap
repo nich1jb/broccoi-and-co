@@ -5,7 +5,14 @@ exports[`AppBar matches snapshot for footer 1`] = `
   position="footer"
 >
   <Text>
-    Made with 💚 in Melbourne
+    Made with 
+    <span
+      aria-label="heart"
+      role="img"
+    >
+      💚
+    </span>
+     in Melbourne
   </Text>
   <Text>
     © 2016 Broccoli & Co. All Rights Reserved

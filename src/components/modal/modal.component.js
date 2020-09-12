@@ -76,7 +76,7 @@ export const Modal = (props) => {
               })} />
               {errors.emailConfirm && <ErrorText>{errors.emailConfirm.message}</ErrorText>}
 
-            <InputSubmit type='submit' value={isLoading ? 'Sending, please wait...' : 'Submit'} disabled={isLoading} />
+            <InputSubmit type='submit' value={isLoading ? 'Sending, please wait...' : 'Send'} disabled={isLoading} />
           </form>
         </>
         }
