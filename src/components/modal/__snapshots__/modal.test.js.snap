@@ -1,0 +1,57 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Modal matches snapshot 1`] = `
+<ModalBackDrop>
+  <ModalContainer
+    onClick={[Function]}
+  >
+    <ModalHeader>
+      Request an Invite
+    </ModalHeader>
+    <form
+      noValidate={true}
+      onSubmit={[Function]}
+    >
+      <InputField
+        name="name"
+        placeholder="First Name"
+        type="text"
+      />
+      <InputField
+        name="email"
+        placeholder="Email"
+        type="email"
+      />
+      <InputField
+        name="emailConfirm"
+        placeholder="Confirm Email"
+        type="email"
+      />
+      <InputSubmit
+        disabled={false}
+        type="submit"
+        value="Submit"
+      />
+    </form>
+  </ModalContainer>
+</ModalBackDrop>
+`;
+
+exports[`Modal matches snapshot for submitted screen 1`] = `
+<ModalBackDrop>
+  <ModalContainer
+    onClick={[Function]}
+  >
+    <ModalHeader>
+      All Done
+    </ModalHeader>
+    <ModalText>
+      You will be the first to experience Broccoli & Co. when we launch.
+    </ModalText>
+    <InputSubmit
+      type="submit"
+      value="Ok"
+    />
+  </ModalContainer>
+</ModalBackDrop>
+`;

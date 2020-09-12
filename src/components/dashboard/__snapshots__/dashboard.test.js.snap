@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Dashboard matches snapshot 1`] = `
+<Fragment>
+  <MainContainer>
+    <AppBar
+      position="header"
+    />
+    <TextContainer>
+      <Title>
+        A better way to enjoy every day.
+      </Title>
+      <Text>
+        Be the first to know when we launch
+      </Text>
+      <Button
+        onClick={[Function]}
+      >
+        Request an invite
+      </Button>
+    </TextContainer>
+    <FooterContainer>
+      <Subtitle>
+        Photo by Lukas from Pexels
+      </Subtitle>
+      <AppBar
+        position="footer"
+      />
+    </FooterContainer>
+  </MainContainer>
+</Fragment>
+`;

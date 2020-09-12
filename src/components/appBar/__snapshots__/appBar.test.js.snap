@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AppBar matches snapshot for footer 1`] = `
+<CustomAppBar
+  position="footer"
+>
+  <Text>
+    Made with 💚 in Melbourne
+  </Text>
+  <Text>
+    © 2016 Broccoli & Co. All Rights Reserved
+  </Text>
+</CustomAppBar>
+`;
+
+exports[`AppBar matches snapshot for header 1`] = `
+<CustomAppBar
+  position="header"
+>
+  <LogoImg
+    src="images/logo.png"
+  />
+</CustomAppBar>
+`;
