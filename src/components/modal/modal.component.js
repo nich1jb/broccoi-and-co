@@ -45,7 +45,7 @@ export const Modal = (props) => {
             <InputField 
               type='text' 
               name='name' 
-              placeholder='First Name' 
+              placeholder='Full Name' 
               ref={register({ 
                 required: 'Name is required', 
                 minLength: {
