@@ -1,40 +1,39 @@
-import * as React from 'react'
-import ReactDOM from 'react-dom'
-import { shallow } from 'enzyme'
-import { cleanup } from '@testing-library/react'
+import React from 'react';
+import { render, cleanup, fireEvent } from '@testing-library/react';
+import "@testing-library/jest-dom/extend-expect";
+import Dashboard from '.';
 
-import Dashboard from '.'
+import 'mutationobserver-shim'
+global.MutationObserver = window.MutationObserver
+
+afterEach(cleanup);
 
 describe('Dashboard', () => {
-  const setState = jest.fn()
-  const useStateMock = (initState) => [initState, setState]
+  it("matches snapshot", () => {
+    const { asFragment } = render(<Dashboard />);
+    expect(asFragment()).toMatchSnapshot();
+  });
 
-  afterEach(() => {
-    jest.clearAllMocks()
-    cleanup
+  it('renders a title', () => {
+    const { getByRole } = render(<Dashboard />)
+    const title = getByRole('heading')
+    expect(title.textContent).toBe('A better way to enjoy every day.')
   })
 
-  it('renders without crashing', () => {
-    const div = document.createElement('div')
-    ReactDOM.render(<Dashboard />, div)
+  it('clicking on the button will launch popup modal', () => {
+    const { getByRole, getByText } = render(<Dashboard />)
+    const button = getByRole('button')
+    fireEvent.click(button)
+    const modalTitle = getByText('Request an Invite')
+    expect(modalTitle).toBeTruthy()
   })
 
-  it('matches snapshot', () => {
-    const wrapper = shallow(<Dashboard />)
-    expect(wrapper).toMatchSnapshot()
-  })
-
-  it('clicking button should open modal', ()=> {
-    jest.spyOn(React, 'useState').mockImplementation(useStateMock)
-    let wrapper = shallow(<Dashboard />)
-    wrapper.find('Button').props().onClick()
-    expect(setState).toHaveBeenCalledWith(true)
-  })
-
-  it('should close modal when close is called', () => {
-    jest.spyOn(React, 'useState').mockImplementation((showModal) => [showModal=true, setState])
-    const wrapper = shallow(<Dashboard />)
-    wrapper.find('Modal').props().close()
-    expect(setState).toHaveBeenCalledWith(false)
+  it('clicking outside modal will close it', () => {
+    const { getByRole, queryByText } = render(<Dashboard />)
+    const button = getByRole('button')
+    fireEvent.click(button)
+    const body = getByRole('generic', {name: 'modal-backdrop'})
+    fireEvent.click(body)
+    expect(queryByText('Request an Invite')).toBeNull()
   })
 })

@@ -1,68 +1,96 @@
-import * as React from 'react'
+import React from 'react';
+import { render, cleanup, fireEvent } from '@testing-library/react';
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 import { act } from 'react-dom/test-utils'
-import { shallow, mount } from 'enzyme'
-import { cleanup } from '@testing-library/react'
+import "@testing-library/jest-dom/extend-expect";
+import Modal from '.';
 
 import 'mutationobserver-shim'
 global.MutationObserver = window.MutationObserver
 
-import Modal from '.'
+afterEach(cleanup);
 
 describe('Modal', () => {
-  const setState = jest.fn()
-  const useStateMock = (initState) => [initState, setState]
+  it("matches snapshot", () => {
+    const { asFragment } = render(<Modal />);
+    expect(asFragment()).toMatchSnapshot();
+  });
 
-  afterEach(() => {
-    jest.clearAllMocks()
-    cleanup
+  it('should display inline errors', async () => {
+    const { getByRole, getByText, queryByText } = render(<Modal />)
+    const nameField = getByRole('textbox', {name: 'name'})
+    fireEvent.input(nameField, {target: {value: 'P'}})
+    const emailField = getByRole('textbox', {name: 'email'})
+    fireEvent.input(emailField, {target: {value: 'invlaid email'}})
+    const emailConfirmField = getByRole('textbox', {name: 'email confirm'})
+    fireEvent.input(emailConfirmField, {target: {value: 'peter.parker@dailybugle.com'}})
+
+    await act(async () =>  {
+      const submitButton = getByText('Send')
+      fireEvent.click(submitButton)
+    })
+
+    expect(queryByText('Name must have at least 3 characters')).toBeTruthy()
+    expect(queryByText('Must be a valid email address')).toBeTruthy()
+    expect(queryByText('Emails must match')).toBeTruthy()
   })
 
-  it('matches snapshot', () => {
-    const wrapper = shallow(<Modal />)
-    expect(wrapper).toMatchSnapshot()
-  })
-
-  it('error messages for all fields should display if nothing is filled in', async () => {
-    const wrapper = mount(<Modal />)
-    await act(async () => {
-      wrapper.find('form').simulate('submit')
-    });
-    act(() => {
-      const formText = wrapper.text()
-      expect(formText).toMatch('Name is required')
-      expect(formText).toMatch('Email is required')
-      expect(formText).toMatch('Confrimation email is required')
-    });
-  })
-
-  it('should set submit user info sucessfully', () => {
-    jest.spyOn(React, 'useState').mockImplementation(useStateMock)
+  it('should render success message on successful submit', async () => {
     const mock = new MockAdapter(axios)
     mock.onPost('https://l94wc2001h.execute-api.ap-southeast-2.amazonaws.com/prod/fake-auth').reply(200, 'Registered')
-    let wrapper = shallow(<Modal />)
-    wrapper.find('form').props().onSubmit()
-    expect(setState).toHaveBeenCalledWith(true)
-  })
 
-  it('should set error message when api call fails', async () => {
-    jest.spyOn(React, 'useState').mockImplementation(useStateMock)
-    const mock = new MockAdapter(axios)
-    const data = { errorMessage: 'Email address in use' }
-    mock.onPost('https://l94wc2001h.execute-api.ap-southeast-2.amazonaws.com/prod/fake-auth').reply(400, data)
-    let wrapper = shallow(<Modal />)
-    await act(async () => {
-      wrapper.find('form').props().onSubmit()
-    });
-    act(() => {
-      expect(setState).toHaveBeenCalledWith('Email address in use')
+    const { getByRole, getByText, queryByText } = render(<Modal />)
+    const nameField = getByRole('textbox', {name: 'name'})
+    fireEvent.input(nameField, {target: {value: 'Peter Parker'}})
+    const emailField = getByRole('textbox', {name: 'email'})
+    fireEvent.input(emailField, {target: {value: 'peter.parker@dailybugle.com'}})
+    const emailConfirmField = getByRole('textbox', {name: 'email confirm'})
+    fireEvent.input(emailConfirmField, {target: {value: 'peter.parker@dailybugle.com'}})
+
+    await act(async () =>  {
+      const submitButton = getByText('Send')
+      fireEvent.click(submitButton)
     })
+    expect(queryByText('You will be the first to experience Broccoli & Co. when we launch.')).toBeTruthy()
   })
 
-  it('matches snapshot for submitted screen', () => {
-    jest.spyOn(React, 'useState').mockImplementation((submitted) => [submitted=true, setState])
-    const wrapper = shallow(<Modal />)
-    expect(wrapper).toMatchSnapshot()
+  it('should not render success message on unsuccessful submit', async () => {
+    const mock = new MockAdapter(axios)
+    mock.onPost('https://l94wc2001h.execute-api.ap-southeast-2.amazonaws.com/prod/fake-auth').reply(200, 'error')
+
+    const { getByRole, getByText, queryByText } = render(<Modal />)
+    const nameField = getByRole('textbox', {name: 'name'})
+    fireEvent.input(nameField, {target: {value: 'Peter Parker'}})
+    const emailField = getByRole('textbox', {name: 'email'})
+    fireEvent.input(emailField, {target: {value: 'peter.parker@dailybugle.com'}})
+    const emailConfirmField = getByRole('textbox', {name: 'email confirm'})
+    fireEvent.input(emailConfirmField, {target: {value: 'peter.parker@dailybugle.com'}})
+
+    await act(async () =>  {
+      const submitButton = getByText('Send')
+      fireEvent.click(submitButton)
+    })
+    expect(queryByText('You will be the first to experience Broccoli & Co. when we launch.')).toBeNull()
   })
+
+  it('should render server error on failed api call', async () => {
+    const mock = new MockAdapter(axios)
+    mock.onPost('https://l94wc2001h.execute-api.ap-southeast-2.amazonaws.com/prod/fake-auth').reply(400, { errorMessage: 'Email address in use' })
+
+    const { getByRole, getByText, queryByText } = render(<Modal />)
+    const nameField = getByRole('textbox', {name: 'name'})
+    fireEvent.input(nameField, {target: {value: 'Peter Parker'}})
+    const emailField = getByRole('textbox', {name: 'email'})
+    fireEvent.input(emailField, {target: {value: 'peter.parker@dailybugle.com'}})
+    const emailConfirmField = getByRole('textbox', {name: 'email confirm'})
+    fireEvent.input(emailConfirmField, {target: {value: 'peter.parker@dailybugle.com'}})
+
+    await act(async () =>  {
+      const submitButton = getByText('Send')
+      fireEvent.click(submitButton)
+    })
+    expect(queryByText('Email address in use')).toBeTruthy()
+  })
+
 })

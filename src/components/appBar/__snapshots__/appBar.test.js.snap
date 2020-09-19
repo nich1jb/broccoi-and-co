@@ -1,31 +1,40 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`AppBar matches snapshot for footer 1`] = `
-<CustomAppBar
-  position="footer"
->
-  <Text>
-    Made with 
-    <span
-      aria-label="heart"
-      role="img"
+<DocumentFragment>
+  <div
+    class="sc-bdnylx cLAbTx"
+  >
+    <div
+      class="sc-gtssRu ieArEE"
     >
-      💚
-    </span>
-     in Melbourne
-  </Text>
-  <Text>
-    © 2016 Broccoli & Co. All Rights Reserved
-  </Text>
-</CustomAppBar>
+      Made with 
+      <span
+        aria-label="heart"
+        role="img"
+      >
+        💚
+      </span>
+       in Melbourne
+    </div>
+    <div
+      class="sc-gtssRu ieArEE"
+    >
+      © 2016 Broccoli & Co. All Rights Reserved
+    </div>
+  </div>
+</DocumentFragment>
 `;
 
 exports[`AppBar matches snapshot for header 1`] = `
-<CustomAppBar
-  position="header"
->
-  <LogoImg
-    src="images/logo.png"
-  />
-</CustomAppBar>
+<DocumentFragment>
+  <div
+    class="sc-bdnylx kOKJeA"
+  >
+    <img
+      class="sc-dlnjPT ksPreD"
+      src="images/logo.png"
+    />
+  </div>
+</DocumentFragment>
 `;

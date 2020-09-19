@@ -1,30 +1,18 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-import { shallow } from 'enzyme'
-import { cleanup } from '@testing-library/react'
+import React from 'react';
+import { render, cleanup } from '@testing-library/react';
+import "@testing-library/jest-dom/extend-expect";
+import AppBar from '.';
 
-import AppBar from '.'
+afterEach(cleanup);
 
 describe('AppBar', () => {
-  afterEach(cleanup)
-
-  it('renders header without crashing', () => {
-    const div = document.createElement('div')
-    ReactDOM.render(<AppBar position='header' />, div)
-  })
-
-  it('renders footer without crashing', () => {
-    const div = document.createElement('div')
-    ReactDOM.render(<AppBar position='footer' />, div)
-  })
-
-  it('matches snapshot for header', () => {
-    const wrapper = shallow(<AppBar position='header' />)
-    expect(wrapper).toMatchSnapshot()
-  })
-
-  it('matches snapshot for footer', () => {
-    const wrapper = shallow(<AppBar position='footer' />)
-    expect(wrapper).toMatchSnapshot()
-  })
+  it("matches snapshot for header", () => {
+    const { asFragment } = render(<AppBar position='header' />);
+    expect(asFragment()).toMatchSnapshot();
+  });
+  
+  it("matches snapshot for footer", () => {
+    const { asFragment } = render(<AppBar position='footer' />);
+    expect(asFragment()).toMatchSnapshot();
+  });
 })

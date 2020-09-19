@@ -29,7 +29,7 @@ export const Modal = (props) => {
   }
 
   return (
-    <ModalBackDrop onClick={props.close}>
+    <ModalBackDrop aria-label='modal-backdrop' onClick={props.close}>
       <ModalContainer onClick={e => {e.stopPropagation()}}>
         {submitted ? 
         <>
@@ -45,6 +45,7 @@ export const Modal = (props) => {
             <InputField 
               type='text' 
               name='name' 
+              aria-label='name'
               placeholder='Full Name' 
               ref={register({ 
                 required: 'Name is required', 
@@ -57,6 +58,7 @@ export const Modal = (props) => {
             <InputField 
               type='email' 
               name='email' 
+              aria-label='email'
               placeholder='Email'
               ref={register({ 
                 required: 'Email is required', 
@@ -69,6 +71,7 @@ export const Modal = (props) => {
             <InputField 
               type='email' 
               name='emailConfirm' 
+              aria-label='email confirm'
               placeholder='Confirm Email'
               ref={register({
                 required: 'Confrimation email is required',

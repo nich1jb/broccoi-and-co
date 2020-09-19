@@ -1,57 +1,50 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Modal matches snapshot 1`] = `
-<ModalBackDrop>
-  <ModalContainer
-    onClick={[Function]}
+<DocumentFragment>
+  <div
+    aria-label="modal-backdrop"
+    class="sc-bdnylx fokQeC"
   >
-    <ModalHeader>
-      Request an Invite
-    </ModalHeader>
-    <form
-      noValidate={true}
-      onSubmit={[Function]}
+    <div
+      class="sc-gtssRu ijuGal"
     >
-      <InputField
-        name="name"
-        placeholder="Full Name"
-        type="text"
-      />
-      <InputField
-        name="email"
-        placeholder="Email"
-        type="email"
-      />
-      <InputField
-        name="emailConfirm"
-        placeholder="Confirm Email"
-        type="email"
-      />
-      <InputSubmit
-        disabled={false}
-        type="submit"
-        value="Send"
-      />
-    </form>
-  </ModalContainer>
-</ModalBackDrop>
-`;
-
-exports[`Modal matches snapshot for submitted screen 1`] = `
-<ModalBackDrop>
-  <ModalContainer
-    onClick={[Function]}
-  >
-    <ModalHeader>
-      All Done
-    </ModalHeader>
-    <ModalText>
-      You will be the first to experience Broccoli & Co. when we launch.
-    </ModalText>
-    <InputSubmit
-      type="submit"
-      value="Ok"
-    />
-  </ModalContainer>
-</ModalBackDrop>
+      <div
+        class="sc-dlnjPT bFzKpP"
+      >
+        Request an Invite
+      </div>
+      <form
+        novalidate=""
+      >
+        <input
+          aria-label="name"
+          class="sc-jSFkmK dwxdDd"
+          name="name"
+          placeholder="Full Name"
+          type="text"
+        />
+        <input
+          aria-label="email"
+          class="sc-jSFkmK dwxdDd"
+          name="email"
+          placeholder="Email"
+          type="email"
+        />
+        <input
+          aria-label="email confirm"
+          class="sc-jSFkmK dwxdDd"
+          name="emailConfirm"
+          placeholder="Confirm Email"
+          type="email"
+        />
+        <input
+          class="sc-jSFkmK sc-gKAblj dwxdDd fSofjz"
+          type="submit"
+          value="Send"
+        />
+      </form>
+    </div>
+  </div>
+</DocumentFragment>
 `;

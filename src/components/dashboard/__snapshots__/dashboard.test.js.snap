@@ -1,32 +1,67 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Dashboard matches snapshot 1`] = `
-<Fragment>
-  <MainContainer>
-    <AppBar
-      position="header"
-    />
-    <TextContainer>
-      <Title>
+<DocumentFragment>
+  <div
+    class="sc-jrsJCI hRBrla"
+  >
+    <div
+      class="sc-bdnylx kOKJeA"
+    >
+      <img
+        class="sc-dlnjPT ksPreD"
+        src="images/logo.png"
+      />
+    </div>
+    <div
+      class="sc-kEqYlL eiAWbY"
+    >
+      <h1
+        class="sc-crzoUp gAWKtw"
+      >
         A better way to enjoy every day.
-      </Title>
-      <Text>
+      </h1>
+      <div
+        class="sc-dIsAE lbEpKq"
+      >
         Be the first to know when we launch
-      </Text>
-      <Button
-        onClick={[Function]}
+      </div>
+      <button
+        class="sc-bqGHjH iNJljF"
       >
         Request an invite
-      </Button>
-    </TextContainer>
-    <FooterContainer>
-      <Subtitle>
+      </button>
+    </div>
+    <div
+      class="sc-iqAbSa jkfJHj"
+    >
+      <div
+        class="sc-ksluoS itTrBN"
+      >
         Photo by Lukas from Pexels
-      </Subtitle>
-      <AppBar
-        position="footer"
-      />
-    </FooterContainer>
-  </MainContainer>
-</Fragment>
+      </div>
+      <div
+        class="sc-bdnylx cLAbTx"
+      >
+        <div
+          class="sc-gtssRu ieArEE"
+        >
+          Made with 
+          <span
+            aria-label="heart"
+            role="img"
+          >
+            💚
+          </span>
+           in Melbourne
+        </div>
+        <div
+          class="sc-gtssRu ieArEE"
+        >
+          © 2016 Broccoli & Co. All Rights Reserved
+        </div>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
 `;
